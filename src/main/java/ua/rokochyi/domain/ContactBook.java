@@ -2,6 +2,7 @@ package ua.rokochyi.domain;
 
 import ua.rokochyi.domain.data.Contact;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ContactBook {
@@ -11,5 +12,6 @@ public interface ContactBook {
     void updateContact();
     List<Contact> searchContact();
     List<Contact> sortContacts();
-    void saveChanges();
+    void saveContacts(String fileName);
+
 }

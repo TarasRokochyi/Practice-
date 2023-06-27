@@ -2,7 +2,12 @@ package ua.rokochyi.domain;
 
 import ua.rokochyi.domain.data.Contact;
 import ua.rokochyi.domain.data.ContactDataSource;
+import ua.rokochyi.domain.data.Person;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppContactBook implements ContactBook{
@@ -42,7 +47,13 @@ public class AppContactBook implements ContactBook{
     }
 
     @Override
-    public void saveChanges(){
-        contactDataSource.writeJson(contacts);
+    public void saveContacts(String fileName) {
+        try {
+            Path path = Paths.get(fileName);
+            contactDataSource.writeJson(contacts, path);
+        }catch(IOException e){
+            System.out.println("Error while writing to file "+ fileName + "\nError message - " + e.getMessage());
+            System.exit(1);
+        }
     }
 }
