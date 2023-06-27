@@ -11,4 +11,5 @@ public interface ContactBook {
     void updateContact();
     List<Contact> searchContact();
     List<Contact> sortContacts();
+    void saveChanges();
 }

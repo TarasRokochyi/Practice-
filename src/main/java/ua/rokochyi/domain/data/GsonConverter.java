@@ -20,7 +20,6 @@ public class GsonConverter implements JsonConverter{
 
     @Override
     public List<Contact> fromJson(String contacts) {
-        //read from json
         //return list of contacts
         TypeToken<List<Contact>> contactsType = new TypeToken<>(){};
         return gson.fromJson(contacts, contactsType);

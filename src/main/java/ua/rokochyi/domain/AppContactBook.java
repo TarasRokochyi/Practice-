@@ -40,4 +40,9 @@ public class AppContactBook implements ContactBook{
     public List<Contact> sortContacts() {
         return null;
     }
+
+    @Override
+    public void saveChanges(){
+        contactDataSource.writeJson(contacts);
+    }
 }
