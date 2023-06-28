@@ -5,12 +5,7 @@ import ua.rokochyi.domain.data.ContactDataSource;
 import ua.rokochyi.domain.data.Person;
 import ua.rokochyi.domain.data.Number;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppContactBook implements ContactBook{
@@ -64,13 +59,7 @@ public class AppContactBook implements ContactBook{
     }
 
     @Override
-    public void saveContacts(String fileName) {
-        try {
-            Path path = Paths.get(fileName);
-            contactDataSource.writeJson(contacts, path);
-        }catch(IOException e){
-            System.out.println("Error while writing to file "+ fileName + "\nError message - " + e.getMessage());
-            System.exit(1);
-        }
+    public boolean saveContacts() {
+        return contactDataSource.writeJson(contacts);
     }
 }

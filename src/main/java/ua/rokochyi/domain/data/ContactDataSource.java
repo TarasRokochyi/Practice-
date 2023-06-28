@@ -1,27 +1,43 @@
 package ua.rokochyi.domain.data;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 public class ContactDataSource {
     private final JsonConverter jsonConverter;
 
-    public ContactDataSource(JsonConverter jsonConverter) {
+    private final String fileName;
+
+    public ContactDataSource(JsonConverter jsonConverter, String fileName) {
         this.jsonConverter = jsonConverter;
+        this.fileName = fileName;
     }
 
-    public List<Contact> readJson(Path path) throws IOException {
-        //get json string from file
-        String jsonString = Files.readString(path);
-        return jsonConverter.fromJson(jsonString);
+    public List<Contact> readJson() {
+        try {
+            Path path = Paths.get(fileName);
+            String jsonString = Files.readString(path);
+            return jsonConverter.fromJson(jsonString);
+        }
+        catch (IOException e){
+            System.out.println("Error while reading from file " + fileName + "\nError message - " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
-    public void writeJson(List<Contact> contacts, Path path) throws IOException {
-        String jsonContent = jsonConverter.toJson(contacts);
-        //write json to file
-        Files.writeString(path, jsonContent);
+    public boolean writeJson(List<Contact> contacts) {
+        try {
+            Path path = Paths.get(fileName);
+            String jsonContent = jsonConverter.toJson(contacts);
+            Files.writeString(path, jsonContent);
+            return true;
+        }
+        catch(IOException e){
+            System.out.println("Error while writing to file "+ fileName + "\nError message - " + e.getMessage());
+            return false;
+        }
     }
 }
