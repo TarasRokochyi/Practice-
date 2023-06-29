@@ -10,10 +10,10 @@ import java.util.List;
 public interface ContactBook {
 
     void addContact(String name, String second_name, LocalDate birthdayDate, String email, List<Number> numbers);
-    void deleteContact();
+    void deleteContact(Contact contact);
     void updateContact();
     void listContact();
-    List<Contact> searchContact();
+    List<Contact> searchContact(String initials);
     List<Contact> sortContacts();
     boolean saveContacts();
 

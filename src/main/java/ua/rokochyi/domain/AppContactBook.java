@@ -6,6 +6,7 @@ import ua.rokochyi.domain.data.Person;
 import ua.rokochyi.domain.data.Number;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppContactBook implements ContactBook{
@@ -26,8 +27,13 @@ public class AppContactBook implements ContactBook{
     }
 
     @Override
-    public void deleteContact() {
-
+    public void deleteContact(Contact contact) {
+        for (int i = 0; i < contacts.size(); i++){
+            if (contact == contacts.get(i)){
+                contacts.remove(i);
+            }
+        }
+        System.out.println("this contact has been deleted");
     }
 
     @Override
@@ -37,20 +43,35 @@ public class AppContactBook implements ContactBook{
 
     @Override
     public void listContact() {
+        int count = 1;
         for (Contact contact: contacts){
             System.out.println();
-            System.out.println("initials: " + contact.person().name() + " " + contact.person().second_name() + "\n"+
-                               "birthday: " + contact.person().birthday());
+            System.out.println(count);
+            System.out.println("initials: " + contact.person().name() + " " + contact.person().second_name() +"\n"+
+                               "birthday: " + contact.person().birthday()+"\n"+
+                               "email: " + contact.email());
             for (Number number: contact.phoneNumbers()){
                 System.out.println(number.provider()+": "+ number.phoneNumber());
             }
+            count++;
         }
         System.out.println();
     }
 
     @Override
-    public List<Contact> searchContact() {
-        return null;
+    public List<Contact> searchContact(String initials) {
+        List<Contact> searchList = new ArrayList<>();
+        for (Contact contact: contacts){
+            if (initials.contains(contact.person().name().toLowerCase()) ||
+                    initials.contains(contact.person().second_name().toLowerCase()) ||
+                    initials.contains(contact.email().toLowerCase()) ||
+                    contact.person().name().toLowerCase().contains(initials) ||
+                    contact.person().second_name().toLowerCase().contains(initials) ||
+                    contact.email().toLowerCase().contains(initials)) {
+                searchList.add(contact);
+            }
+        }
+        return searchList;
     }
 
     @Override

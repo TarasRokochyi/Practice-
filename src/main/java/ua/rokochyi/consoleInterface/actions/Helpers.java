@@ -1,5 +1,6 @@
 package ua.rokochyi.consoleInterface.actions;
 
+import ua.rokochyi.domain.data.Contact;
 import ua.rokochyi.domain.data.Number;
 
 import java.util.ArrayList;
@@ -31,4 +32,35 @@ public class Helpers {
         }
         return phoneNumbers;
     }
+
+    public static void printThisList (List<Contact> contacts){
+        int count = 1;
+        for (Contact contact: contacts){
+            System.out.println();
+            System.out.println(count);
+            System.out.println("initials: " + contact.person().name() + " " + contact.person().second_name() + "\n"+
+                    "birthday: " + contact.person().birthday());
+            for (Number number: contact.phoneNumbers()){
+                System.out.println(number.provider()+": "+ number.phoneNumber());
+            }
+            count++;
+        }
+        System.out.println();
+    }
+
+    public static boolean choiceToDelete(Scanner scan){
+        String choice;
+        while (true) {
+            System.out.println("delete this contact?(y/n): ");
+            choice = scan.nextLine().toLowerCase().trim();
+            if (choice.equals("y") || choice.equals("n")) {
+                break;
+            }
+        }
+        if(choice.equals("y")){
+            return true;
+        }
+        return false;
+    }
+
 }

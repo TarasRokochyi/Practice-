@@ -4,11 +4,9 @@ import ua.rokochyi.domain.AppContactBook;
 
 import java.util.Scanner;
 
-public class SaveAction implements Action{
-
+public class SortAction implements Action{
     @Override
     public void Operate(AppContactBook appContactBook, Scanner scan) {
-        appContactBook.saveContacts();
-        System.out.println("you have saved all the changes");
+
     }
 }
