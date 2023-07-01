@@ -37,35 +37,31 @@ public class AppContactBook implements ContactBook{
     }
 
     @Override
-    public void updateContact() {
-
+    public void updateContact(String name, String second_name, LocalDate birthdayDate, String email, List<Number> numbers, Contact contactToDelete) {
+        for (int i = 0; i < contacts.size(); i++){
+            if(contacts.get(i) == contactToDelete){
+                contacts.remove(i);
+            }
+        }
+        addContact(name, second_name, birthdayDate, email, numbers);
     }
 
     @Override
     public void listContact() {
         int count = 1;
+        System.out.println();
         for (Contact contact: contacts){
-            System.out.println();
             System.out.println(count);
-            System.out.println("initials: " + contact.person().name() + " " + contact.person().second_name() +"\n"+
-                               "birthday: " + contact.person().birthday()+"\n"+
-                               "email: " + contact.email());
-            for (Number number: contact.phoneNumbers()){
-                System.out.println(number.provider()+": "+ number.phoneNumber());
-            }
+            System.out.println(contact.toString());
             count++;
         }
-        System.out.println();
     }
 
     @Override
     public List<Contact> searchContact(String initials) {
         List<Contact> searchList = new ArrayList<>();
         for (Contact contact: contacts){
-            if (initials.contains(contact.person().name().toLowerCase()) ||
-                    initials.contains(contact.person().second_name().toLowerCase()) ||
-                    initials.contains(contact.email().toLowerCase()) ||
-                    contact.person().name().toLowerCase().contains(initials) ||
+            if (contact.person().name().toLowerCase().contains(initials) ||
                     contact.person().second_name().toLowerCase().contains(initials) ||
                     contact.email().toLowerCase().contains(initials)) {
                 searchList.add(contact);

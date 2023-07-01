@@ -15,9 +15,7 @@ public class AddAction implements Action {
         String name = scan.nextLine().trim();
         System.out.println("enter second name: ");
         String second_name = scan.nextLine().trim();
-        System.out.println("enter birthday(yyyy-mm-dd): ");
-        String date = scan.nextLine().trim();
-        LocalDate birthdayDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate birthdayDate = Helpers.getLocalDate(scan);
         System.out.println("enter email: ");
         String email = scan.nextLine().trim();
 

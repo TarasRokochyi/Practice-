@@ -48,7 +48,7 @@ public class Main {
            case "search": return new SearchAction();
            case "sort": return new SortAction();
            case "save": return new SaveAction();
-           case "help":
+           case "help": return new HelpAction();
            case "quit": return new QuitAction();
            default:
                throw new Exception("Command not found!");

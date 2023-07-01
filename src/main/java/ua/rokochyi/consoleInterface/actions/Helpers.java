@@ -3,6 +3,8 @@ package ua.rokochyi.consoleInterface.actions;
 import ua.rokochyi.domain.data.Contact;
 import ua.rokochyi.domain.data.Number;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,6 +36,11 @@ public class Helpers {
     }
 
     public static void printThisList (List<Contact> contacts){
+        if(contacts.size() == 1){
+            System.out.println();
+            System.out.println(contacts.get(0).toString());
+            return;
+        }
         int count = 1;
         for (Contact contact: contacts){
             System.out.println();
@@ -48,19 +55,61 @@ public class Helpers {
         System.out.println();
     }
 
-    public static boolean choiceToDelete(Scanner scan){
+    public static boolean choiceToDo(Scanner scan){
         String choice;
         while (true) {
-            System.out.println("delete this contact?(y/n): ");
             choice = scan.nextLine().toLowerCase().trim();
             if (choice.equals("y") || choice.equals("n")) {
                 break;
             }
+            System.out.println("enter 'y' or 'n': ");
         }
         if(choice.equals("y")){
             return true;
         }
         return false;
+    }
+
+    public static void printNumbers (List<Number> phoneNumbers){
+        for (Number number: phoneNumbers){
+            System.out.println(number.provider() +": "+ number.phoneNumber());
+        }
+    }
+
+    public static int chooseItem (List<String> items, Scanner scan){
+        int count = 1;
+        int num;
+        while (true) {
+            for(String item: items){
+                System.out.println(count + " - " + item);
+                count++;
+            }
+            System.out.println("enter number: ");
+
+            try {
+                num = Integer.parseInt(scan.nextLine().trim());
+                if(num < 1 || num > items.size()){
+                    throw new Exception();
+                }
+            }catch(Exception e){
+                System.out.println("invalid input");
+                continue;
+            }
+            return num;
+        }
+    }
+
+    public static LocalDate getLocalDate (Scanner scan) {
+        while (true) {
+            System.out.println("enter birthday(yyyy-mm-dd): ");
+            String date = scan.nextLine().trim();
+            try {
+                LocalDate birthdayDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+                return birthdayDate;
+            } catch (Exception e) {
+                System.out.println("invalid input");
+            }
+        }
     }
 
 }
