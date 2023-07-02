@@ -77,9 +77,9 @@ public class Helpers {
     }
 
     public static int chooseItem (List<String> items, Scanner scan){
-        int count = 1;
         int num;
         while (true) {
+            int count = 1;
             for(String item: items){
                 System.out.println(count + " - " + item);
                 count++;

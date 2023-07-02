@@ -15,7 +15,7 @@ public interface ContactBook {
     void updateContact(String name, String second_name, LocalDate birthdayDate, String email, List<Number> numbers, Contact contactToDelete);
     void listContact();
     List<Contact> searchContact(String initials);
-    List<Contact> sortContacts();
+    void sortContacts(int chosen_item);
     boolean saveContacts();
 
 }

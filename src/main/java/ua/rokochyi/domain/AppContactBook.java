@@ -6,8 +6,7 @@ import ua.rokochyi.domain.data.Person;
 import ua.rokochyi.domain.data.Number;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AppContactBook implements ContactBook{
 
@@ -71,8 +70,21 @@ public class AppContactBook implements ContactBook{
     }
 
     @Override
-    public List<Contact> sortContacts() {
-        return null;
+    public void sortContacts(int chosen_item) {
+        switch (chosen_item){
+            case 1:
+                contacts.sort(Comparator.comparing(o -> o.person().name()));
+                break;
+            case 2:
+                contacts.sort(Comparator.comparing(o -> o.person().second_name()));
+                break;
+            case 3:
+                contacts.sort(Comparator.comparing(o -> o.person().birthday()));
+                break;
+            case 4:
+                contacts.sort(Comparator.comparing(o -> o.email()));
+                break;
+        }
     }
 
     @Override
