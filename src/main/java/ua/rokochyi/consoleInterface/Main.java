@@ -26,10 +26,9 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("add / delete / update / list / search / sort / save / help / quit");
-        String command;
         while (true) {
             System.out.println("command: ");
-            command = scan.nextLine().toLowerCase().trim();
+            String command = scan.nextLine().toLowerCase().trim();
             try{
                 getAction(command).Operate(appContactBook, scan);
             }
@@ -51,7 +50,7 @@ public class Main {
            case "help": return new HelpAction();
            case "quit": return new QuitAction();
            default:
-               throw new Exception("Command not found!");
+               throw new Exception("Command not found! Try help!");
        }
     }
 

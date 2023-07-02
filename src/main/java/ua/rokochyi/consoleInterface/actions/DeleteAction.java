@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class DeleteAction implements Action{
     @Override
     public void Operate(AppContactBook appContactBook, Scanner scan) {
-        System.out.println("enter name or second name or email of person you want to delete: ");
+        System.out.println("enter name or second name or email or number of person you want to delete: ");
         String initials = scan.nextLine().toLowerCase().trim();
 
         List<Contact> searchList = appContactBook.searchContact(initials);

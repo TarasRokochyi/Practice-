@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class UpdateAction implements Action{
     @Override
     public void Operate(AppContactBook appContactBook, Scanner scan) {
-        System.out.println("enter name or second name or email of person you want to update: ");
+        System.out.println("enter name or second name or email or number of person you want to update: ");
         String initials = scan.nextLine().toLowerCase().trim();
         List<Contact> searchList = appContactBook.searchContact(initials);
         List<String> items = new ArrayList<>();

@@ -65,6 +65,11 @@ public class AppContactBook implements ContactBook{
                     contact.email().toLowerCase().contains(initials)) {
                 searchList.add(contact);
             }
+            for (Number number: contact.phoneNumbers()){
+                if (number.phoneNumber().contains(initials)){
+                    searchList.add(contact);
+                }
+            }
         }
         return searchList;
     }
